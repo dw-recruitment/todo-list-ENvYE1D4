@@ -6,15 +6,25 @@
             [ns-tracker.core :refer [ns-tracker]]
             [ring.util.response :as ring-resp]))
 
+(defn set-content-type
+  [response content-type]
+  (assoc-in response [:headers "Content-Type"] content-type))
+
 (defn home-page
   ([req]
    (let [gif (io/file (io/resource "public/under-construction.gif"))]
-     (assoc-in (ring-resp/response gif) [:headers "Content-Type"]
-               "image/gif"))))
+     (set-content-type (ring-resp/response gif) "image/gif"))))
+
+(defn about-page
+  ([req]
+   (let [pdf (io/file (io/resource "public/dev-candidate-exercise.pdf"))]
+     (set-content-type (ring-resp/response pdf) "application/pdf"))))
 
 (defroutes routes
   [[["/"
-     {:get home-page}]]])
+     {:get home-page}
+     ["/about"
+      {:get about-page}]]]])
 
 (def track-namespaces
   (ns-tracker ["src"]))
