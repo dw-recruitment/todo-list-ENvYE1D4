@@ -1,0 +1,12 @@
+[{:db/id #db/id[:db.part/db]
+  :db/ident :todo/description
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Todo description"
+  :db.install/_attribute :db.part/db}
+ {:db/id #db/id[:db.part/db]
+  :db/ident :todo/completed?
+  :db/valueType :db.type/boolean
+  :db/cardinality :db.cardinality/one
+  :db/doc "Todo status"
+  :db.install/_attribute :db.part/db}]
